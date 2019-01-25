@@ -1,0 +1,244 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OMDb",
+    "description": "",
+    "version": "1.0"
+  },
+  "host": "omdbapi.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Search": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Title": {
+                        "type": "string",
+                        "description": "Title"
+                      },
+                      "Year": {
+                        "type": "string",
+                        "description": "Year"
+                      },
+                      "imdbID": {
+                        "type": "string",
+                        "description": "imdbID"
+                      },
+                      "Type": {
+                        "type": "string",
+                        "description": "Type"
+                      },
+                      "Poster": {
+                        "type": "string",
+                        "description": "Poster"
+                      }
+                    }
+                  },
+                  "description": "Search"
+                },
+                "totalResults": {
+                  "type": "string",
+                  "description": "totalResults"
+                },
+                "Response": {
+                  "type": "string",
+                  "description": "Response"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "OMDbSearch",
+        "x-ms-visibility": "important",
+        "summary": "Move search",
+        "description": "Open Move Database movie search",
+        "parameters": [
+          {
+            "name": "s",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "x-ms-visibility": "important",
+            "description": "Search value",
+            "x-ms-summary": "Search value"
+          },
+          {
+            "name": "apikey",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "MYKEY",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Title": {
+                  "type": "string",
+                  "description": "Title"
+                },
+                "Year": {
+                  "type": "string",
+                  "description": "Year"
+                },
+                "Rated": {
+                  "type": "string",
+                  "description": "Rated"
+                },
+                "Released": {
+                  "type": "string",
+                  "description": "Released"
+                },
+                "Runtime": {
+                  "type": "string",
+                  "description": "Runtime"
+                },
+                "Genre": {
+                  "type": "string",
+                  "description": "Genre"
+                },
+                "Director": {
+                  "type": "string",
+                  "description": "Director"
+                },
+                "Writer": {
+                  "type": "string",
+                  "description": "Writer"
+                },
+                "Actors": {
+                  "type": "string",
+                  "description": "Actors"
+                },
+                "Plot": {
+                  "type": "string",
+                  "description": "Plot"
+                },
+                "Language": {
+                  "type": "string",
+                  "description": "Language"
+                },
+                "Country": {
+                  "type": "string",
+                  "description": "Country"
+                },
+                "Awards": {
+                  "type": "string",
+                  "description": "Awards"
+                },
+                "Poster": {
+                  "type": "string",
+                  "description": "Poster"
+                },
+                "Ratings": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Source": {
+                        "type": "string",
+                        "description": "Source"
+                      },
+                      "Value": {
+                        "type": "string",
+                        "description": "Value"
+                      }
+                    }
+                  },
+                  "description": "Ratings"
+                },
+                "Metascore": {
+                  "type": "string",
+                  "description": "Metascore"
+                },
+                "imdbRating": {
+                  "type": "string",
+                  "description": "imdbRating"
+                },
+                "imdbVotes": {
+                  "type": "string",
+                  "description": "imdbVotes"
+                },
+                "imdbID": {
+                  "type": "string",
+                  "description": "imdbID"
+                },
+                "Type": {
+                  "type": "string",
+                  "description": "Type"
+                },
+                "DVD": {
+                  "type": "string",
+                  "description": "DVD"
+                },
+                "BoxOffice": {
+                  "type": "string",
+                  "description": "BoxOffice"
+                },
+                "Production": {
+                  "type": "string",
+                  "description": "Production"
+                },
+                "Website": {
+                  "type": "string",
+                  "description": "Website"
+                },
+                "Response": {
+                  "type": "string",
+                  "description": "Response"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "OMDbGetById",
+        "x-ms-visibility": "important",
+        "description": "Open Move Database get movie by IMDb Id",
+        "summary": "Get By IMDb Id",
+        "parameters": [
+          {
+            "name": "i",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "IMDb Id",
+            "x-ms-summary": "IMDb Id"
+          },
+          {
+            "name": "apikey",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "4ea484c0",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {},
+  "security": [],
+  "tags": []
+}
