@@ -1,0 +1,16 @@
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+node_modules/
+.nyc_output/
+testresults/
+coverage/
+bak/
+
+*.user
+[Pp]ackages/
+[Bb]in/
+[Oo]bj/

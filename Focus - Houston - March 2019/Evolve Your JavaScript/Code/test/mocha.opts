@@ -1,0 +1,5 @@
+./test/**/*.test.js 
+--require babel-core
+--require ./test/setup
+--reporter-options mochaFile=./testresults/TEST-RESULT.xml
+--reporter mocha-junit-reporter 

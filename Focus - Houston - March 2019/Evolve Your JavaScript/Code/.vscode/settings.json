@@ -1,0 +1,26 @@
+{
+    "mocha.requires": [
+        "babel-register",
+        "test/setup"
+    ],
+    "mocha.sideBarOptions": {
+        "lens": false,
+        "decoration": true,
+        "autoUpdateTime": 2000,
+        "showDebugTestStatus": true    
+    },
+    "mocha.coverage": {
+        "enable": true,
+        "decoration": true,
+        "runWithInterval": false,
+        "autoUpdateInterval": 20000,
+        "activeOnStart": true,
+        "runAfterTest": false,
+        "runCoverageAfterFileSave": false,
+        "reporters": []
+    },
+    "debug.openDebug": "neverOpen",
+    "cSpell.words": [
+        "initialise"
+    ]
+}
