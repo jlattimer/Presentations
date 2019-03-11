@@ -7,17 +7,11 @@
 # Output Pipeline Variable: D365SolutionFilenamen (solution filename)
 
 
-#$Credentials = @{
-#    Username = "crmadmin@org.onmicrosoft.com"
-#    Password = "password"
-#    Url = "https://org.crm.dynamics.com"
-#}
-
-#$Credentials = @{
-#    Username = 'jlattimer@JLMVP.onmicrosoft.com'
-#    Password = 'RcEg!g6$3iZV3'
-#    Url = 'https://jlmvp.crm.dynamics.com'
-#}
+$Credentials = @{
+    Username = "crmadmin@org.onmicrosoft.com"
+    Password = "password"
+    Url = "https://org.crm.dynamics.com"
+}
 
 $Credentials = @{
     Username = "$(CrmDevUsername)"

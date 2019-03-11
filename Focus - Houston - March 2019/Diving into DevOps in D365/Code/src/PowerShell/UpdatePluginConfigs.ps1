@@ -4,16 +4,10 @@
 # Either StepName or StepId needs to be populated
 
 $Credentials = @{
-    Username = "jlattimer@JLMVP.onmicrosoft.com"
-    Password = "@aKWy8GT4he9VsO@"
-    Url      = "https://jlmvpsandbox.crm.dynamics.com"
+    Username = "$(CrmTestUsername)"
+    Password = "$(CrmTestPassword)"
+    Url = "$(CrmTestUrl)"
 }
-
-#$Credentials = @{
-#    Username = "$(CrmTestUsername)"
-#    Password = "$(CrmTestPassword)"
-#    Url = "$(CrmTestUrl)"
-#}
 
 $Parameters = @{
     StepName               = "Demo.FakeXrmEasy.Plugin.BasicDebuggingPlugin: Create of account"

@@ -1,0 +1,84 @@
+{
+    "tasks": [
+        {
+            "environment": {},
+            "displayName": "PowerShell Script: Log Release Stage to Application Insights",
+            "alwaysRun": false,
+            "continueOnError": false,
+            "condition": "always()",
+            "enabled": true,
+            "timeoutInMinutes": 0,
+            "inputs": {
+                "targetType": "inline",
+                "filePath": "",
+                "arguments": "",
+                "script": "# Logs Azure DevOps release stage data to Application Insights\n\n$AiKey = \"$(AppInsightsKey)\"\n\n$startReleaseStage = Get-Date -Date \"$Env:System_PipelineStartTime\"\nWrite-Host \"Start time: $startReleaseStage\"\n\n$endReleaseStage = Get-Date\nWrite-Host \"End time: $endReleaseStage\"\n\n$ts = New-TimeSpan -Start $startReleaseStage -End $endReleaseStage\n$tm = [math]::Round($ts.TotalMinutes, 2)\nWrite-Host \"Build time (min): $tm\"\n\n# $(AppInsightsKey) should be your Application Insights Instrumentation Key\nif (-Not ('$(AppInsightsKey)' -match(\"^(\\{){0,1}[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}(\\}){0,1}$\")))\n{\n    Write-Host \"Invalid Application Insights Instrumentation Key\"\n    exit 1\n}\nelse \n{\n    $date = $endReleaseStage.ToUniversalTime()\n    $json =\n    '{\n        \"data\": {\n          \"baseData\": {\n            \"metrics\": [\n              {\n                   \"name\": \"Release\",\n                   \"kind\": 0,\n                   \"value\": ' + $tm + '\n              }\n            ],\n            \"properties\": {\n                \"source\": \"Azure DevOps\",\n                \"releaseDefinitionName\": \"$(Release.DefinitionName)\",\n                \"releaseAttemptNumber\": $(Release.AttemptNumber),\n                \"releaseEnvironmentName\": \"$(Release.EnvironmentName)\",\n                \"releaseReason\": \"$(Release.Reason)\",\n                \"releaseReleaseName\": \"$(Release.ReleaseName)\",\n                \"jobStatus\": \"$(Agent.JobStatus)\"\n            }\n          },\n          \"baseType\": \"MetricData\"\n        },\n       \"iKey\": \"' + $AiKey + '\",\n       \"name\": \"Microsoft.ApplicationInsights.' + $AiKey + '.Metric\",\n        \"time\": \"' + $date + '\"\n      }'\n\n    $response = Invoke-RestMethod 'https://dc.services.visualstudio.com/v2/track' -Method POST -Body $json -ContentType 'application/json'\n    \n    if ($response.itemsAccepted -eq 1)\n    {\n        Write-Host 'Logged release stage to Application Insights'\n    }\n    else\n    {\n        Write-Host 'Failed logging release stage to Application Insights'\n        exit 1\n    }\n}",
+                "errorActionPreference": "stop",
+                "failOnStderr": "false",
+                "ignoreLASTEXITCODE": "false",
+                "pwsh": "false",
+                "workingDirectory": ""
+            },
+            "task": {
+                "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+                "versionSpec": "2.*",
+                "definitionType": "task"
+            }
+        }
+    ],
+    "runsOn": [
+        "Agent",
+        "DeploymentGroup"
+    ],
+    "revision": 2,
+    "createdBy": {
+        "displayName": "Your.Name",
+        "id": "06e607bd-81a8-4114-84bf-3b64e7060e4a",
+        "uniqueName": "Your.Name@outlook.com"
+    },
+    "createdOn": "2019-03-09T04:30:56.600Z",
+    "modifiedBy": {
+        "displayName": "Your.Name",
+        "id": "06e607bd-81a8-4114-84bf-3b64e7060e4a",
+        "uniqueName": "Your.Name@outlook.com"
+    },
+    "modifiedOn": "2019-03-09T04:35:38.303Z",
+    "comment": "",
+    "id": "5e681db0-9706-47a1-b8df-ae184fa68cf5",
+    "name": "Log Release Stage to Application Insights",
+    "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0,
+        "isTest": false
+    },
+    "iconUrl": "https://cdn.vsassets.io/v/M147_20190301.10/_content/icon-meta-task.png",
+    "friendlyName": "Log Release Stage to Application Insights",
+    "description": "",
+    "category": "Deploy",
+    "definitionType": "metaTask",
+    "author": "Your.Name",
+    "demands": [],
+    "groups": [],
+    "inputs": [
+        {
+            "aliases": [],
+            "options": {},
+            "properties": {},
+            "name": "AppInsightsKey",
+            "label": "AppInsightsKey",
+            "defaultValue": "$(AppInsightsKey)",
+            "required": true,
+            "type": "string",
+            "helpMarkDown": "",
+            "groupName": ""
+        }
+    ],
+    "satisfies": [],
+    "sourceDefinitions": [],
+    "dataSourceBindings": [],
+    "instanceNameFormat": "Task group: Log Release Stage to Application Insights $(AppInsightsKey)",
+    "preJobExecution": {},
+    "execution": {},
+    "postJobExecution": {}
+}

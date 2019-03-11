@@ -4,7 +4,7 @@
 # Ensure Build Agent Job Allow scripts to access the OAuth token is checked
 
 $Parameters = @{
-    AzureDevOpsInstanceName = 'jlattimer'
+    AzureDevOpsInstanceName = 'YourAzureDevopsName'
     AzureDevOpsProjectName  = 'AATEST'
     Repo                    = 'TestBuildScripts'
     RepoPath                = 'prod/test.ps1'

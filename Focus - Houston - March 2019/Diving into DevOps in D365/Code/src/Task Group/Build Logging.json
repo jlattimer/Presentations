@@ -1,0 +1,114 @@
+{
+    "tasks": [
+        {
+            "environment": {},
+            "displayName": "Inspect Environment Variables",
+            "alwaysRun": false,
+            "continueOnError": false,
+            "condition": "always()",
+            "enabled": true,
+            "timeoutInMinutes": 0,
+            "inputs": {},
+            "task": {
+                "id": "a8caceab-8551-48ad-925d-20a178904e10",
+                "versionSpec": "1.*",
+                "definitionType": "task"
+            }
+        },
+        {
+            "environment": {},
+            "displayName": "Inspect File Structure",
+            "alwaysRun": false,
+            "continueOnError": false,
+            "condition": "always()",
+            "enabled": true,
+            "timeoutInMinutes": 0,
+            "inputs": {},
+            "task": {
+                "id": "a8caceab-8551-48ad-925d-20a178904e11",
+                "versionSpec": "1.*",
+                "definitionType": "task"
+            }
+        },
+        {
+            "environment": {},
+            "displayName": "PowerShell Script: Log Build to Application Insights",
+            "alwaysRun": false,
+            "continueOnError": false,
+            "condition": "always()",
+            "enabled": true,
+            "timeoutInMinutes": 0,
+            "inputs": {
+                "targetType": "inline",
+                "filePath": "",
+                "arguments": "",
+                "script": "# Logs Azure DevOps build data to Application Insights\n\n$AiKey = \"$(AppInsightsKey)\"\n\n$startBuild = Get-Date -Date \"$Env:System_PipelineStartTime\"\nWrite-Host \"Start time: $startBuild\"\n\n$endBuild = Get-Date\nWrite-Host \"End time: $endBuild\"\n\n$ts = New-TimeSpan -Start $startBuild -End $endBuild\n$tm = [math]::Round($ts.TotalMinutes, 2)\nWrite-Host \"Build time (min): $tm\"\n\n# $(AppInsightsKey) should be your Application Insights Instrumentation Key\nif (-Not ('$(AppInsightsKey)' -match(\"^(\\{){0,1}[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}(\\}){0,1}$\")))\n{\n    Write-Host \"Invalid Application Insights Instrumentation Key\"\n    exit 1\n}\nelse \n{\n    $date = $endBuild.ToUniversalTime()\n    $json =\n    '{\n        \"data\": {\n          \"baseData\": {\n            \"metrics\": [\n              {\n                   \"name\": \"Build\",\n                   \"kind\": 0,\n                   \"value\": ' + $tm + '\n              }\n            ],\n            \"properties\": {\n                \"source\": \"Azure DevOps\",\n                \"buildDefinitionName\": \"$(Build.DefinitionName)\",\n                \"buildNumber\": $(Build.BuildNumber),\n                \"buildQueuedBy\": \"$(Build.QueuedBy)\",\n                \"buildReason\": \"$(Build.Reason)\",\n                \"jobStatus\": \"$(Agent.JobStatus)\"\n            }\n          },\n          \"baseType\": \"MetricData\"\n        },\n       \"iKey\": \"' + $AiKey + '\",\n       \"name\": \"Microsoft.ApplicationInsights.' + $AiKey + '.Metric\",\n        \"time\": \"' + $date + '\"\n      }'\n\n    $response = Invoke-RestMethod 'https://dc.services.visualstudio.com/v2/track' -Method POST -Body $json -ContentType 'application/json'\n    \n    if ($response.itemsAccepted -eq 1)\n    {\n        Write-Host 'Logged build to Application Insights'\n    }\n    else\n    {\n        Write-Host 'Failed logging build to Application Insights'\n        exit 1\n    }\n}",
+                "errorActionPreference": "stop",
+                "failOnStderr": "false",
+                "ignoreLASTEXITCODE": "false",
+                "pwsh": "false",
+                "workingDirectory": ""
+            },
+            "task": {
+                "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+                "versionSpec": "2.*",
+                "definitionType": "task"
+            }
+        }
+    ],
+    "runsOn": [
+        "Agent",
+        "DeploymentGroup"
+    ],
+    "revision": 7,
+    "createdBy": {
+        "displayName": "Your.Name",
+        "id": "06e607bd-81a8-4114-84bf-3b64e7060e4a",
+        "uniqueName": "Your.Name@outlook.com"
+    },
+    "createdOn": "2019-03-09T02:58:40.767Z",
+    "modifiedBy": {
+        "displayName": "Your.Name",
+        "id": "06e607bd-81a8-4114-84bf-3b64e7060e4a",
+        "uniqueName": "Your.Name@outlook.com"
+    },
+    "modifiedOn": "2019-03-09T04:35:20.240Z",
+    "comment": "",
+    "id": "f04a3f5b-dcb5-441d-bba0-7965d791f24c",
+    "name": "Build Logging",
+    "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0,
+        "isTest": false
+    },
+    "iconUrl": "https://cdn.vsassets.io/v/M147_20190301.10/_content/icon-meta-task.png",
+    "friendlyName": "Build Logging",
+    "description": "",
+    "category": "Build",
+    "definitionType": "metaTask",
+    "author": "Your.Name",
+    "demands": [],
+    "groups": [],
+    "inputs": [
+        {
+            "aliases": [],
+            "options": {},
+            "properties": {},
+            "name": "AppInsightsKey",
+            "label": "AppInsightsKey",
+            "defaultValue": "",
+            "required": true,
+            "type": "string",
+            "helpMarkDown": "",
+            "groupName": ""
+        }
+    ],
+    "satisfies": [],
+    "sourceDefinitions": [],
+    "dataSourceBindings": [],
+    "instanceNameFormat": "Task group: Build Logging $(AppInsightsKey)",
+    "preJobExecution": {},
+    "execution": {},
+    "postJobExecution": {}
+}

@@ -1,16 +1,10 @@
 ﻿# Deletes a solution or solution patch
 
 $Credentials = @{
-    Username = "jlattimer@JLMVP.onmicrosoft.com"
-    Password = "@aKWy8GT4he9VsO@"
-    Url      = "https://jlmvp.crm.dynamics.com"
+    Username = "$(CrmTestUsername)"
+    Password = "$(CrmTestPassword)"
+    Url = "$(CrmTestUrl)"
 }
-
-#$Credentials = @{
-#    Username = "$(CrmTestUsername)"
-#    Password = "$(CrmTestPassword)"
-#    Url = "$(CrmTestUrl)"
-#}
 
 # TODO: Need to figure out how to remove version number
 $Parameters = @{

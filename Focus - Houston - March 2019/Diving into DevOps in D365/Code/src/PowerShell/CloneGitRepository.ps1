@@ -4,7 +4,7 @@
 # Ensure Azure DevOps Agent Job Options: Allow scripts to access the OAuth token is checked
 
 $Parameters = @{
-    DevOpsAccountName = 'jlattimer'
+    DevOpsAccountName = 'YourAzureDevopsName'
     DevOpsProjectName = 'ALMTest'
     DevOpsRepoName    = 'Plugins'
     TargetFolder      = "Repos"

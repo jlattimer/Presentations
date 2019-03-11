@@ -7,7 +7,7 @@
     "test": "nyc mocha",
     "posttest": "node ./tools/process-coverage-report.js"
   },
-  "author": "Jason Lattimer (https://jlattimer.blogspot.com)",
+  "author": "Jason Lattimer (https://YourAzureDevopsName.blogspot.com)",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {

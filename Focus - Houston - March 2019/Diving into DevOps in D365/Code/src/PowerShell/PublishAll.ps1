@@ -3,13 +3,9 @@
 }
 
 
-#$User = "crmadmin@org.onmicrosoft.com"
-#$PWord =  "password" | ConvertTo-SecureString -AsPlainText -Force
-#$Url = "https://org.crm.dynamics.com"
-
-$User = 'jlattimer@JLMVP.onmicrosoft.com'
-$PWord = 'RcEg!g6$3iZV3' | ConvertTo-SecureString -AsPlainText -Force
-$Url = 'https://jlmvp.crm.dynamics.com'
+$User = "crmadmin@org.onmicrosoft.com"
+$PWord =  "password" | ConvertTo-SecureString -AsPlainText -Force
+$Url = "https://org.crm.dynamics.com"
 
 Write-Verbose "Executing with no parameters"
 
