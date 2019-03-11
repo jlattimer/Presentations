@@ -15,8 +15,8 @@ $Credentials = @{
 }
 
 $Parameters = @{
-    ImportFileName                              = "FTSMA_1_0_0_0.zip"
-    ImportPath                                  = "$(System.DefaultWorkingDirectory)/_FTSMA/solution/"
+    ImportFileName                              = "test_1_0_0_0.zip"
+    ImportPath                                  = "$(System.DefaultWorkingDirectory)/_test/solution/"
     PublishChange                               = $true
     ActivatePlugins                             = $true
     OverwriteUnManagedCustomizations            = $false

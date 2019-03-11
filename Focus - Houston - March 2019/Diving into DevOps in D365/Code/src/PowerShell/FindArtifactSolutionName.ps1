@@ -3,7 +3,7 @@
 # Output Pipeline Variable: D365SolutionFileName (soution zip file name)
 
 $Parameters = @{
-    ArtifactFolder = "$(System.DefaultWorkingDirectory)/_FTSMA/solution/"
+    ArtifactFolder = "$(System.DefaultWorkingDirectory)/_test/solution/"
 }
 Write-Host "Executing with parameters:"
 Write-Host ($Parameters | Out-String)

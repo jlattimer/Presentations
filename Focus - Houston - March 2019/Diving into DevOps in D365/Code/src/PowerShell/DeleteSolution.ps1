@@ -8,7 +8,7 @@ $Credentials = @{
 
 # TODO: Need to figure out how to remove version number
 $Parameters = @{
-    SolutionUniqueName = "FTSMA_Patch_3308efe8_1_0_1_0.zip"
+    SolutionUniqueName = "test_Patch_3308efe8_1_0_1_0.zip"
     ErrorIfMissing     = $false
 }
 Write-Verbose "Executing with parameters:"

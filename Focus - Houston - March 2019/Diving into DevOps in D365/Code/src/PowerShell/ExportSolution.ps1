@@ -20,7 +20,7 @@ $Credentials = @{
 }
 
 $Parameters = @{
-    SolutionUniqueName = 'FTSMA'
+    SolutionUniqueName = 'test'
     OutputPath         = "$(Agent.BuildDirectory)\DownloadedSolutions"
     ExportAsManaged    = $false
 }
