@@ -1,0 +1,117 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CalculatorFunction",
+    "version": "1.0.0"
+  },
+  "host": "yourfunction.azurewebsites.net",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/api/Calculate": {
+      "post": {
+        "operationId": "CalculatePost",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "equation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Equation"
+            }
+          }
+        ],
+        "summary": "Basic calculator",
+        "description": "Perform a basic mathematical operation on two numbers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Answer"
+            }
+          }
+        },
+        "security": [
+          {
+            "apikeyQuery": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Equation": {
+      "type": "object",
+      "properties": {
+        "Number1": {
+          "description": "1st number",
+          "format": "float",
+          "type": "number",
+          "x-ms-summary": "Number1",
+          "x-ms-visibility": "important"
+        },
+        "Number2": {
+          "description": "2nd number",
+          "format": "float",
+          "type": "number",
+          "x-ms-summary": "Number2",
+          "x-ms-visibility": "important"
+        },
+        "Operation": {
+          "description": "Operation",
+          "type": "string",
+          "enum": [
+            "+",
+            "-",
+            "x",
+            "÷"
+          ],
+          "x-ms-summary": "Operation",
+          "x-ms-visibility": "important"
+        }
+      },
+      "required": [
+        "Number1",
+        "Number2",
+        "Operation"
+      ]
+    },
+    "Answer": {
+      "type": "object",
+      "properties": {
+        "Result": {
+          "description": "The result of the equation",
+          "format": "float",
+          "type": "number",
+          "x-ms-summary": "Result"
+        },
+        "Error": {
+          "description": "Error details",
+          "type": "string",
+          "x-ms-summary": "Error"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "apikeyQuery": {
+      "type": "apiKey",
+      "name": "code",
+      "in": "query"
+    }
+  },
+  "security": [],
+  "tags": []
+}

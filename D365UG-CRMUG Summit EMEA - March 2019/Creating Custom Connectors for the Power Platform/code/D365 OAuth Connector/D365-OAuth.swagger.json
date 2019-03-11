@@ -1,0 +1,196 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "D365 OAuth",
+    "description": "D365 custom action example",
+    "version": "1.0"
+  },
+  "host": "org.crm.dynamics.com",
+  "basePath": "/api/data/v9.1",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/WhoAmI()": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context"
+                },
+                "BusinessUnitId": {
+                  "type": "string",
+                  "description": "BusinessUnitId"
+                },
+                "UserId": {
+                  "type": "string",
+                  "description": "UserId"
+                },
+                "OrganizationId": {
+                  "type": "string",
+                  "description": "OrganizationId"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Contains the data that is needed to retrieve the system user ID for the currently logged on user or the user under whose context the code is running.",
+        "operationId": "WhoAmI",
+        "parameters": [
+          {
+            "name": "OData-MaxVersion",
+            "in": "header",
+            "required": true,
+            "type": "integer",
+            "default": "4.0",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "OData-Version",
+            "in": "header",
+            "required": true,
+            "type": "integer",
+            "default": "4.0",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json; charset=utf-8",
+            "x-ms-visibility": "internal"
+          }
+        ],
+        "description": "Contains the data that is needed to retrieve the system user ID for the currently logged on user or the user under whose context the code is running."
+      }
+    },
+    "/lat_DemoAction": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "@odata.context": {
+                  "type": "string",
+                  "description": "@odata.context",
+                  "title": "",
+                  "x-ms-visibility": "internal"
+                },
+                "Success": {
+                  "type": "boolean",
+                  "description": "Success",
+                  "title": "",
+                  "x-ms-visibility": "important",
+                  "enum": [
+                    "",
+                    "true",
+                    "false"
+                  ]
+                },
+                "Message": {
+                  "type": "string",
+                  "description": "Message",
+                  "title": "",
+                  "x-ms-visibility": "advanced"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "DemoAction",
+        "summary": "This executes a custom action which tests which returns an error message if \"error\" is sent as a parameter other returns a success",
+        "description": "This executes a custom action",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "OData-MaxVersion",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "4.0",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "OData-Version",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "4.0",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json; charset=utf-8",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ValueToProcess": {
+                  "type": "string",
+                  "description": "ValueToProcess",
+                  "title": "This is the value sent to the custom action",
+                  "x-ms-visibility": "important"
+                }
+              },
+              "required": [
+                "ValueToProcess"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "oauth2_auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.windows.net/common/oauth2/authorize",
+      "tokenUrl": "https://login.windows.net/common/oauth2/authorize",
+      "scopes": {}
+    }
+  },
+  "security": [
+    {
+      "oauth2_auth": []
+    }
+  ],
+  "tags": []
+}
