@@ -1,0 +1,23 @@
+{
+  "name": "pcf-project",
+  "version": "1.0.0",
+  "description": "Project containing your PowerApps Component Framework (PCF) control.",
+  "scripts": {
+    "build": "pcf-scripts build",
+    "clean": "pcf-scripts clean",
+    "rebuild": "pcf-scripts rebuild",
+    "start": "pcf-scripts start",
+    "deploy": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Tools/deploy.ps1"
+  },
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "@types/powerapps-component-framework": "1.1.0",
+    "leaflet": "^1.4.0",
+    "leaflet-defaulticon-compatibility": "^0.1.1"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.4.4",
+    "pcf-scripts": "~0",
+    "pcf-start": "~0"
+  }
+}

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+  <control namespace="jlattimer" constructor="MapView" version="0.0.106" display-name-key="MapView" description-key="Repalces an entity view with a map plotting location based on latitude and longitude" control-type="standard" preview-image="images/lat_preview.png">
+    <!-- dataset node represents a set of entity records on CDS; allow more than one datasets -->
+    <data-set name="entityDataSet" display-name-key="DatasetKey">
+      <!-- 'property-set' node represents a unique, configurable property that each record in the dataset must provide. -->
+      <property-set name="entityDisplayName" display-name-key="Entity Display Name" description-key="Name to appear on the map marker" of-type="SingleLine.Text" usage="bound" required="true" />
+      <property-set name="entityLatitudeField" display-name-key="Entity Latitude" description-key="Latitude field name" of-type="Decimal" usage="bound" required="true" />
+      <property-set name="entityLongitudeField" display-name-key="Entity Longitude" description-key="Longitude field name" of-type="Decimal" usage="bound" required="true" />
+    </data-set>
+    <resources>
+      <library name="Leaflet" version="1.4.0" order="1">
+        <packaged_library path="../node_modules/leaflet/dist/leaflet.js" version="1.4.0" />
+        <!-- <packaged_library path="../node_modules/leaflet/dist/images/layers-2x.png" version="1.4.0" />
+        <packaged_library path="../node_modules/leaflet/dist/images/layers.png" version="1.4.0" />
+        <packaged_library path="../node_modules/leaflet/dist/images/marker-icon-2x.png" version="1.4.0" />
+        <packaged_library path="../node_modules/leaflet/dist/images/marker-icon.png" version="1.4.0" />
+        <packaged_library path="../node_modules/leaflet/dist/images/marker-shadow.png" version="1.4.0" /> -->
+      </library>
+      <library name="leaflet-defaulticon-compatibility" version="0.1.1" order="2">
+        <packaged_library path="../node_modules/leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.js" version="0.1.1" />
+      </library>
+      <code path="index.ts" order="3" />
+      <css path="../node_modules/leaflet/dist/leaflet.css" order="1" />
+      <css path="../node_modules/leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css" order="2" />
+      <css path="css/MapView.css" order="3" />
+      <img path="images/lat_preview.png" />
+    </resources>
+  </control>
+</manifest>
