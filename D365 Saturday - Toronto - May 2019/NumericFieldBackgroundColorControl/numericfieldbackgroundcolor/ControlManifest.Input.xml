@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="jlattimer" constructor="NumericFieldBackgroundColor" version="0.0.29" display-name-key="NumericFieldBackgroundColor" description-key="Changes the background color of a numeric field based on the value" control-type="standard" preview-image="lat_preview.png">
+    <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
+    <!-- <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" /> -->
+
+    <!-- Property node's of-type attribute can be of-type-group attribute. 
+      Example: -->
+    <type-group name="numbers">
+      <type>Whole.None</type>
+      <type>Currency</type>
+      <type>FP</type>
+      <type>Decimal</type>
+    </type-group>
+    <property name="controlValue" display-name-key="NumericField" description-key="Field for changing background colors" of-type-group="numbers" usage="bound" required="true" />
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <css path="css/NumericFieldBackgroundColor.css" order="1" />
+      <img path="img/lat_preview.png" />
+    </resources>
+  </control>
+</manifest>
